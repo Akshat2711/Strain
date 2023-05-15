@@ -1,0 +1,24 @@
+from tkinter import*
+from PIL import ImageTk,Image
+window1=Tk()
+global count,list1
+count=-1
+list1=[ImageTk.PhotoImage(Image.open("D:\code comp\p1.png")),ImageTk.PhotoImage(Image.open("D:\code comp\p2.png"))]
+window1.title("up_we_fly")
+window1.geometry("500x358")
+canvas=Canvas(window1,width=5000,height=2000,highlightthickness=0)
+canvas.create_image(0,0,anchor='nw',image=list1[0])
+canvas.pack()
+def next():
+    global count
+    if count==1:
+        canvas.create_image(0,0,anchor='nw',image=list1[0])
+        count=0
+    else:
+        canvas.create_image(0,0,anchor='nw',image=list1[count+1])
+        count+=1
+    window1.after(5000,next)
+next()
+        
+    
+  

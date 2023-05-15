@@ -1,0 +1,15 @@
+from smtplib import *
+send="Hello, your OTP is {}"
+s_e="cs.pr0j3ct.xii@gmail.com"#sender email
+passwd="omtghmrwfehjgcqb"#pass of sender
+r_e="akshatsrivastava206@gmail.com"#receiver email
+
+
+        
+server=SMTP("smtp.gmail.com",587)
+
+        
+        
+server.starttls()
+server.login(s_e,passwd)
+server.sendmail(s_e,r_e,send)

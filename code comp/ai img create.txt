@@ -1,0 +1,32 @@
+import os
+
+import openai
+import urllib.request
+from PIL import Image
+
+
+
+PROMPT = " apple lying on table"
+
+openai.api_key = "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"
+
+response = openai.Image.create(
+    prompt=PROMPT,
+    n=1,
+    size="256x256",
+)
+
+out=response["data"][0]["url"]
+print(out)
+
+
+  
+# Retrieving the resource located at the URL
+# and storing it in the file name a.png
+url = str(out)
+urllib.request.urlretrieve(url, "geeksforgeeks.png")
+  
+# Opening the image and displaying it (to confirm its presence)
+img = Image.open(r"geeksforgeeks.png")
+img.show()
+
