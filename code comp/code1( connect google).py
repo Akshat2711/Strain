@@ -1,4 +1,3 @@
-#api key have been changed update to run code+ database create table images ofdesc table already uploaded in folder
 import requests
 from bs4 import BeautifulSoup
 from tkinter import*
@@ -16,7 +15,7 @@ import speech_recognition as sr
 import webbrowser
 from random import*
 language = 'en'#language of output
-openai.api_key ="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"
+openai.api_key ="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"
 
 
 con=mycon.connect(host="localhost",user="root",database="searchhistory",password="27ramome76A")
@@ -160,7 +159,8 @@ def window1():
             cur.execute("insert into history() values('{}','{}','{}','{}');".format(resai+"[AI]",dateai,current_timeai,fm))
             con.commit()
             output = openai.ChatCompletion.create(model="gpt-3.5-turbo",messages=[{"role": "user","content":str(aientry)}])
-            msgai.configure(text=output['choices'][0]['message']['content'],fg="red",font=("Helvitica",10))
+            msgai.place(x=158, y=80)
+            msgai.insert("0.0",output['choices'][0]['message']['content'])#########################
 
 
         def ai_mainback():
@@ -244,7 +244,9 @@ def window1():
                     inputaudio=r.recognize_google(audio)
                     print("you have said:\n"+inputaudio)
                     output = openai.ChatCompletion.create(model="gpt-3.5-turbo",messages=[{"role": "user","content":str(inputaudio)}])
-                    msgai.configure(text=output['choices'][0]['message']['content'],font=("Helvitica",10),fg="red")
+                    msgai.place(x=158, y=80)
+                    msgai.insert("0.0",output['choices'][0]['message']['content'])
+                    ############################################
                     myobj = gTTS(text=output['choices'][0]['message']['content'], lang=language, slow=False)
                     myobj.save("micout.mp3")
                     os.system("micout.mp3")
@@ -257,7 +259,7 @@ def window1():
                     current_timeaim = time.strftime("%H:%M:%S", tai)
                     cur.execute("insert into history() values('{}','{}','{}','{}');".format(inputaudio+"[AI(mic)]",dateaimic,current_timeaim,fm))
                     con.commit()
-                    ##########################
+
 
                 except Exception as e:
                     print("error")
@@ -272,8 +274,7 @@ def window1():
         lblai3=Label(win_ai,text="N",font=("Helvitica",19),bg="black",fg="red").place(x=1504,y=0)
         butai=Button(win_ai,bg="black",fg="white",text="FIND",font=("Helvitica",19),command=resai).place(x=1100,y=10)
         butai2=Button(win_ai,bg="black",fg="white",text="BACK",font=("Helvitica",19),command=ai_mainback).place(x=0,y=10)
-        msgai=Message(win_ai,text="",bg="black",font=("Helvitica",10),aspect=100,justify=CENTER)
-        msgai.place(relx=0.5,rely=0.5,anchor='center')
+        msgai=Text(win_ai,width=68,height=20,bg="black",fg="red",font=("Helvitica",20))
         butai3=Button(win_ai,bg="black",fg="white",text="CREATE IMAGE USING AI",font=("Helvitica",19),command=createimage).place(x=0,y=740)
         butai4=Button(win_ai,bg="black",fg="white",command=speech_txt,text="MIC",font=("Helvitica",19)).place(x=154,y=10)
     global msg1
@@ -477,7 +478,3 @@ def login():
     loginwin.mainloop()
      
 login()
-    
-    
-
-#
